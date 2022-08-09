@@ -1,21 +1,25 @@
-import React, { useContext } from "react";
+import React, { useContext, useState} from "react";
 import CartContext from "../../context/cart-context";
 import Modal from "../UI/Modal";
 import styles from './Cart.module.css';
 import CartItem from "./CartItem";
 
-const Cart = (props)=>{
+const Cart = ()=>{
+    // console.log("Rerun");
     const ctx = useContext(CartContext);
-    const Items = ctx.cartItems;
+    const [items, setItems] = useState(ctx.cartItems);
+
+    const refresh = (items)=>{
+        setItems(items);
+    }
 
     const cartItems = (
         <ul className={styles['cart-items']}>
-            {Items.map(item => 
+            {items.map(item => 
             <CartItem
             key={item.id} 
             item ={item}
-            onRemove={()=>{}}
-            onAdd={()=>{}}
+            refresh = {refresh}
             />)}
         </ul>
     );
@@ -28,6 +32,7 @@ const Cart = (props)=>{
         console.log("Order");
     };
 
+    
     return(
         <Modal>
             {cartItems}

@@ -20,18 +20,7 @@ const MealItem = (props)=>{
     }
 
     const addToCart = ()=>{
-        for(let i = 0; i< ctx.cartItems.length; i++)
-        {
-            if(ctx.cartItems[i].id === meal.id)
-            {
-                console.log(ctx.cartItems[i].name + " repeated");
-                ctx.cartItems.splice(i, 1);
-                console.log(ctx.cartItems);
-                break;
-            }
-        }
-        ctx.setCartItems([newCartItemDetails, ...ctx.cartItems]);
-        // console.log("CartItems: "+ ctx.cartItems);
+        ctx.addToCart(newCartItemDetails);
     };
 
     return (
